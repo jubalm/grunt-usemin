@@ -114,15 +114,14 @@ module.exports = function (grunt) {
     var blockReplacements = options.blockReplacements || {};
 
     debug('Looking at %s target', this.target);
-    var patterns;
+    var patterns = {};
 
     // Check if we have a user defined pattern
     if (options.patterns && options.patterns[this.target]) {
       debug('Using user defined pattern for %s', this.target);
-      patterns = options.patterns[this.target];
+      patterns[this.target] = options.patterns[this.target];
     } else {
       debug('Using predefined pattern for %s', this.target);
-      patterns = options.type;
     }
 
     // var locator = options.revmap ? grunt.file.readJSON(options.revmap) : function (p) { return grunt.file.expand({filter: 'isFile'}, p); };
@@ -146,6 +145,7 @@ module.exports = function (grunt) {
 
         // write the new content to disk
         grunt.file.write(filename, content);
+
       });
     });
   });
